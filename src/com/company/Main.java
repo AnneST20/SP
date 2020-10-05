@@ -9,7 +9,7 @@ import java.util.TreeMap;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        String pathname ="C:\\My information\\3 course\\СП\\little-prince.txt";
+        String pathname ="C:\\My information\\3 course\\СП\\test.txt";
         String str=get_text(pathname);
         str=get_clear_strings(str);
         String[] words = get_separate_words(str);
@@ -29,7 +29,7 @@ public class Main {
             return str;
         }
         else{
-            throw new Exception("Ôàéë ïóñòèé àáî éîãî íå ³ñíóº");
+            throw new Exception("");
         }
     }
 
@@ -58,14 +58,15 @@ public class Main {
                         break;
                     }
                 }
-                if (repeats == false) {
+                if (!repeats) {
                     word += element;
                 }
             }
             else {
-                if (repeats == false) {
-                    words[number] = word;
-                    number++;
+                if (!(repeats) && !repeats(words, word)) {
+
+                        words[number] = word;
+                        number++;
                 }
                 repeats = false;
                 word = "";
@@ -74,11 +75,22 @@ public class Main {
         return words;
     }
 
+    public static boolean repeats(String[] words, String word) {
+        for (String w: words) {
+            if (w != null) {
+                if (w.equals(word)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public static void print_result(String[] words) {
         System.out.println("Варіант 4 (знайти слова, літери яких не повторюються):");
         int quantity = 1;
         for (String word : words) {
-            if(word != null && quantity < 100) {
+            if(word != null) {
                 System.out.println(quantity + "." + word);
                 quantity++;
             }
